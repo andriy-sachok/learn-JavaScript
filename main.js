@@ -1,3 +1,14 @@
+const obj = {};
+obj.size;
+obj.color = "yellow";
+obj["not an identifier"] = 3;
+
+const SIZE = Symbol();
+obj[SIZE] = 8;
+
+alert(obj["not an identifier"]);
+
+/*
 $(document).ready(function() {
     'use strict';
     paper.install(window);
@@ -17,6 +28,7 @@ $(document).ready(function() {
         var c = Shape.Circle(event.point, 20);
         c.fillColor = 'orange';
     };
+*/
 
 /*  var c;
     for(var x = 25; x < 400; x += 50) {
@@ -26,5 +38,5 @@ $(document).ready(function() {
         }
     }
 */
-    paper.view.draw();
-}); 
+    // paper.view.draw();
+// });
