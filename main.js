@@ -1,42 +1,62 @@
-const obj = {};
-obj.size;
-obj.color = "yellow";
-obj["not an identifier"] = 3;
+// Повертає випадкове ціле число в діапазоні [m, n] (включно)
+function rand(m, n) {
+    return m + Math.floor((n - m + 1) * Math.random());
+}
 
-const SIZE = Symbol();
-obj[SIZE] = 8;
+// Випадково повертає строку, представляючу одну з шести
+// граней Корони та Якоря
+function randFace() {
+    return ["crown", "anchor", "heart", "spade", "club", "diamond"]
+        [rand(0, 5)];
+}
 
-alert(obj["not an identifier"]);
+let funds = 50; // Початкова умова
+let round = 0;
 
-/*
-$(document).ready(function() {
-    'use strict';
-    paper.install(window);
-    paper.setup(document.getElementById('mainCanvas'));
+while (funds > 1 && funds < 100) {
+    round++;
+    console.log(`round ${round}:`);
+    console.log(`\tstarting funds: ${funds}p`);
 
-    var tool = new Tool();
-
-    var c = Shape.Circle(200, 200, 80);
-    c.fillColor = 'black';
-    var text = new PointText(200, 200);
-    text.justification = 'center';
-    text.fillColor = 'white';
-    text.fontsize = 20;
-    text.content = 'hello world';
-
-    tool.onMouseDown = function(event) {
-        var c = Shape.Circle(event.point, 20);
-        c.fillColor = 'orange';
-    };
-*/
-
-/*  var c;
-    for(var x = 25; x < 400; x += 50) {
-        for(var y = 25; y < 400; y += 50) {
-            c = Shape.Circle(x, y, 20);
-        c.fillColor = 'orange';
-        }
+    // Розташування ставок
+    let bets = {crown: 0, anchor: 0, heart: 0,
+        spade: 0, club: 0, diamond: 0};
+    let totalBet = rand(1, funds);
+    if(totalBet === 7) {
+        totalBet = funds;
+        bets.heart = totalBet;
+    } else {
+        // Ділення всих ставок
+        let remaining = totalBet;
+        do {
+            let bet = rand(1, remaining);
+            let face = randFace();
+            bets[face] = bets[face] + bet;
+            remaining = remaining - bet;
+        } while (remaining > 0)
     }
-*/
-    // paper.view.draw();
-// });
+    funds = funds - totalBet;
+    console.log(`\tbets: ` +
+    Object.keys(bets).map(face => `${face}: ${bets[face]} pence`).join(', ') +
+    ` (total: ${totalBet} pence)`);
+
+    // Кидок костей
+    const hand = [];
+    for (let roll = 0; roll < 3; roll++) {
+        hand.push(randFace());
+    }
+
+    console.log(`\thand: ${hand.join(', ')}`);
+
+    // Отримання виграшу
+    let winnings = 0;
+    for (let die = 0; die < hand.length; die++) {
+        let face = hand[die];
+        if(bets[face] > 0) winnings = winnings + bets[face];
+    }
+    
+    funds = funds + winnings;
+    console.log(`\twinnings: ${winnings}`);
+}
+
+console.log(`\tending funs: ${funds}`);
