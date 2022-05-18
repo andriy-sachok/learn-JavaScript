@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
+        <title>Simple HTML page</title>
         <link rel="stylesheet" href="main.css">
     </head>
     <body>
-        <h1>My first application!</h1>
-        <p>Welcome to <i>Learning JavaScript, 3rd Edition</i>.</p>
-
-        <!-- <canvas id="mainCanvas"></canvas> -->
-        
-        <!-- <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
-
-        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.9.24/paper-full.min.js"></script> -->
-
+        <header>
+            <h1>Simple HTML-page</h1>
+        </header>
+        <div id="content">
+            <p>It's <i>simple</i> HTML-file.</p>
+            <div class="callout">
+                <p>He make possible to do amazing things!</p>
+            </div>
+            <p>Identifiers of elements (for example, <span
+                class="code">#content</span>)
+                are unique (they should only be used once per page).</p>
+            <p>Class names (for example, <span class="code">.callout</span>)
+                can be used int differnt elements.</p>
+            <div id="callout2" class="callout fancy">
+                <p>One HTML-element can have several classes.</p>
+            </div>
+        </div>
         <script src="main.js"></script>
     </body>
 </html>
