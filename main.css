@@ -9,3 +9,7 @@
     padding: 1px 4px;
     font-family: monospace;
 }
+.highlight {
+    background: #ff0;
+    font-style: italic;
+}
