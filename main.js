@@ -9,7 +9,6 @@ const highlightParas = (containing) => {
     p.classList.add('highlight');
   }
 }
-highlightParas('unique');
 
 const removeParaHighlights = () => {
  const paras = document.querySelectorAll(`p.highlight`);
@@ -17,3 +16,5 @@ const removeParaHighlights = () => {
    p.classList.remove(`highlight`);
  } 
 }
+
+highlightParas('unique');
