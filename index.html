@@ -1,28 +1,23 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Simple HTML page</title>
-        <link rel="stylesheet" href="main.css">
-    </head>
-    <body>
-        <header>
-            <h1>Simple HTML-page</h1>
-        </header>
-        <div id="content">
-            <p>It's <i>simple</i> HTML-file.</p>
-            <div class="callout">
-                <p>He make possible to do amazing things!</p>
-            </div>
-            <p>Identifiers of elements (for example, <span
-                class="code">#content</span>)
-                are unique (they should only be used once per page).</p>
-            <p>Class names (for example, <span class="code">.callout</span>)
-                can be used int differnt elements.</p>
-            <div id="callout2" class="callout fancy">
-                <p>One HTML-element can have several classes.</p>
-            </div>
-        </div>
-        <script src="main.js"></script>
-    </body>
+
+<head>
+    <meta charset="utf-8">
+    <title>Simple HTML page</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div>
+        <button>Click on me!</button>
+    </div>
+    <div class="serverInfo">
+        Server platform: <span data-replace="platform">???</span>,
+        Node version: <span data-replace="nodeVersion">???</span>,
+        Uptime: <span data-replace="uptime">???</span> seconds.
+    </div>
+    <script type="application/javascript;version=1.8" src="refreshServerInfo.js"></script>
+    <script src="main.js"></script>
+</body>
+
 </html>
