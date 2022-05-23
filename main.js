@@ -1,39 +1,27 @@
-const highlightParas = (containing) => {
-  if (typeof containing === 'string') {
-    containing = new RegExp(`\\b${containing}\\b`, 'i');
-  }
-  const paras = document.querySelectorAll(`p`);
-  // console.log(paras);
-  for (let p of paras) {
-    if (!containing.test(p.textContent)) continue;
-    p.classList.add('highlight');
+function logEvent(handlerName, type, cancel, stop, stopImmediate) {
+  return function (evt) {
+    if (cancel) evt.preventDefault();
+    if (stop) evt.stopPropagation();
+    if (stopImmediate) evt.stopImmediatePropagation();
+    console.log(`${type}: ${handlerName}` +
+      (evt.defaultPrevented ? ' (canceled) ' : ''));
   }
 }
 
-const removeParaHighlights = () => {
-  const paras = document.querySelectorAll(`p.highlight`);
-  for (let p of paras) {
-    p.classList.remove(`highlight`);
-  }
+function addEventLogger(elt, type, action) {
+  const capture = type === 'capture';
+  elt.addEventListener('click',
+    logEvent(elt.tagName, type, action === 'cancel',
+      action === 'stop', action === 'stop!'), capture);
 }
 
-highlightParas('unique');
+const body = document.querySelector('body');
+const div = document.querySelector(`div`);
+const button = document.querySelector(`button`);
 
-const highlightActions = document.querySelectorAll(`[data-action="highlight"]`);
-
-for (let a of highlightActions) {
-  a.addEventListener(`click`, evt => {
-    evt.preventDefault();
-    highlightParas(a.dataset.containing);
-  });
-}
-
-const removeHighlightActions =
-  document.querySelectorAll(`[data-action="removeHighlights"]`);
-
-for (let a of removeHighlightActions) {
-  a.addEventListener('click', evt => {
-    evt.preventDefault();
-    removeParaHighlights();
-  });
-}
+addEventLogger(body, 'capture');
+addEventLogger(body, 'bubble');
+addEventLogger(div, 'capture', 'cancel');
+addEventLogger(div, 'bubble');
+addEventLogger(button, 'capture', 'stop');
+addEventLogger(button, 'bubble');
