@@ -1,3 +1,1 @@
-export const user = (p) => {
-    return `${p}`;
-};
+alert("Module done!");
