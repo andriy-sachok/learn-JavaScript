@@ -1,1 +1,1 @@
-alert("Module done!");
+import calculator from "./main.js";
