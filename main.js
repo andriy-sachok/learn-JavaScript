@@ -1,4 +1,4 @@
-import { user } from "./firstModule.js";
-const userName = 'John';
-
-document.body.innerHTML = user(userName);
+import sum from "";
+import min from "";
+import max from "";
+import zero from "";
